@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Engineering Progress Dashboard</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<style>
+  html, body { background:#020617; color:#e2e8f0; font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; }
+  .snap { scroll-snap-type: y proximity; height: 100vh; overflow-y: scroll; }
+  section { scroll-snap-align: start; min-height: 100vh; padding: 4rem 6vw; display: flex; flex-direction: column; justify-content: center; position: relative; }
+  section p, section li { line-height: 1.65; }
+  .accent { color:#22d3ee; }
+  .amber { color:#fbbf24; }
+  .label { letter-spacing: .25em; text-transform: uppercase; font-size: .8rem; color:#94a3b8; font-weight:500; }
+  .card { background: rgba(15,23,42,.7); border:1px solid rgba(51,65,85,.6); border-radius: 1rem; padding: 1.5rem; backdrop-filter: blur(8px); }
+  .hero-img { position:absolute; inset:0; width:100%; height:100%; object-fit:cover; opacity:.35; z-index:0; }
+  .hero-img.soft { opacity:.18; }
+  .content { position:relative; z-index:1; max-width: 1100px; margin: 0 auto; width:100%; }
+  .num-bullet { width:2rem; height:2rem; border-radius:9999px; background:#0e7490; color:#ecfeff; display:inline-flex; align-items:center; justify-content:center; font-weight:700; font-size:.875rem; flex-shrink:0; }
+  .badge-pill { display:inline-block; padding:.25rem .75rem; border-radius:9999px; font-size:.75rem; background:rgba(34,211,238,.12); color:#22d3ee; border:1px solid rgba(34,211,238,.3); margin-right:.5rem; margin-bottom:.5rem; }
+  .nav { position:fixed; right:1.5rem; top:50%; transform:translateY(-50%); z-index:50; display:flex; flex-direction:column; gap:.5rem; }
+  .nav a { width:.5rem; height:.5rem; border-radius:9999px; background:#334155; transition:all .2s; display:block; }
+  .nav a:hover { background:#22d3ee; transform:scale(1.5); }
+  table.simple { width:100%; border-collapse: collapse; font-size:.875rem; }
+  table.simple th, table.simple td { padding: .5rem .75rem; text-align:left; border-bottom:1px solid rgba(51,65,85,.5); }
+  table.simple th { color:#94a3b8; font-weight:500; letter-spacing:.05em; text-transform:uppercase; font-size:.7rem; }
+</style>
+</head>
+<body class="snap">
+
+<nav class="nav hidden md:flex">
+  <a href="#s1" title="Cover"></a><a href="#s2" title="Problem"></a><a href="#s3" title="Solution"></a>
+  <a href="#s4" title="Sample"></a><a href="#s5" title="How it works"></a><a href="#s6" title="Skills"></a>
+  <a href="#s7" title="Badges"></a><a href="#s8" title="KPI review"></a><a href="#s9" title="Risks"></a><a href="#s10" title="Roadmap"></a><a href="#s11" title="Closing"></a>
+</nav>
+
+<!-- 1. COVER -->
+<section id="s1">
+  <img src="img/hero.png" class="hero-img" alt="">
+  <div class="content text-center">
+    <p class="label mb-6 accent">A management visibility tool</p>
+    <h1 class="text-6xl md:text-8xl font-bold tracking-tight mb-6">Engineering<br><span class="accent">Progress Dashboard</span></h1>
+    <p class="text-xl md:text-2xl text-slate-300 max-w-2xl mx-auto">A continuous, gamified view of how each engineer is growing &mdash; with their next performance-review goals built in.</p>
+    <p class="mt-12 text-sm text-slate-500">Scroll &darr;</p>
+  </div>
+</section>
+
+<!-- 2. PROBLEM -->
+<section id="s2" style="min-height:auto; padding-top:6rem; padding-bottom:6rem;">
+  <div class="content">
+    <p class="label mb-4">The problem</p>
+    <h2 class="text-4xl md:text-5xl font-bold mb-4">Both sides fly blind between reviews.</h2>
+    <p class="text-lg text-slate-300 max-w-3xl mb-10">Performance reviews happen once or twice a year. In the months between, managers can't see growth and engineers forget what they're being graded on. Both ends of the relationship lose signal.</p>
+
+    <div class="grid md:grid-cols-2 gap-6">
+      <!-- Manager column -->
+      <div>
+        <p class="label mb-4 accent">For the manager</p>
+        <div class="space-y-4">
+          <div class="card">
+            <p class="amber font-semibold mb-2">Annual reviews are too coarse</p>
+            <p class="text-slate-300 text-sm">12 months condensed into a one-hour conversation. Memory bias, recency bias, and missing data dominate.</p>
+          </div>
+          <div class="card">
+            <p class="amber font-semibold mb-2">Daily standups are too narrow</p>
+            <p class="text-slate-300 text-sm">"What did you do yesterday?" tells you about today, not about a 6-month skill trajectory.</p>
+          </div>
+          <div class="card">
+            <p class="amber font-semibold mb-2">Skill growth is invisible</p>
+            <p class="text-slate-300 text-sm">No view of <em>which</em> skills each engineer is sharpening, on <em>which</em> projects, at <em>what</em> rate.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- IC column -->
+      <div>
+        <p class="label mb-4 accent">For the engineer</p>
+        <div class="space-y-4">
+          <div class="card">
+            <p class="amber font-semibold mb-2">KPIs are forgotten by week three</p>
+            <p class="text-slate-300 text-sm">After the review meeting ends, the goals go in a doc that nobody reopens. Six months later, the engineer is shocked at what they're being graded on.</p>
+          </div>
+          <div class="card">
+            <p class="amber font-semibold mb-2">No feedback loop, no motivation</p>
+            <p class="text-slate-300 text-sm">Hard work doesn't feel like progress when no one &mdash; including yourself &mdash; can see it. Constant, visible signal beats annual verdicts.</p>
+          </div>
+          <div class="card">
+            <p class="amber font-semibold mb-2">"Where do I actually stand?"</p>
+            <p class="text-slate-300 text-sm">Engineers can't see which skills they're growing, where they're plateauing, or how close they are to the next level. Self-improvement needs a mirror.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <p class="mt-10 text-base text-slate-400 max-w-3xl">Engineers already log hours and write daily notes. The data exists. What's missing is a system that turns those entries into a continuous, two-way picture of growth &mdash; one the manager <em>and</em> the engineer can use every week.</p>
+  </div>
+</section>
+
+<!-- 3. SOLUTION -->
+<section id="s3">
+  <div class="content">
+    <p class="label mb-4 accent">The solution</p>
+    <h2 class="text-4xl md:text-5xl font-bold mb-8">A weekly &amp; monthly dashboard, gamified.</h2>
+    <div class="grid md:grid-cols-2 gap-10 items-start">
+      <div class="space-y-5 text-slate-300">
+        <p><span class="num-bullet mr-3">1</span><strong class="text-white">XP per logged hour.</strong> Each timesheet entry earns experience points in the relevant skill bucket.</p>
+        <p><span class="num-bullet mr-3">2</span><strong class="text-white">Per-engineer skill set.</strong> ICs and Leads are graded on different skills &mdash; no one is judged on dimensions they don't own.</p>
+        <p><span class="num-bullet mr-3">3</span><strong class="text-white">Levels &amp; badges.</strong> Eight levels per skill, plus weekly badges (Deep Focus, Multi-skilled, Skill Up, Cross-Trainer).</p>
+        <p><span class="num-bullet mr-3">4</span><strong class="text-white">One self-contained file.</strong> A single HTML dashboard per period. Opens in any browser. Email it, host it, archive it.</p>
+      </div>
+      <div class="card">
+        <p class="label mb-3">Outputs</p>
+        <ul class="text-sm text-slate-300 space-y-2">
+          <li>&bull; Per-engineer card: hours, level, radar, badges</li>
+          <li>&bull; Project-hours bar chart</li>
+          <li>&bull; Team skill-coverage heatmap</li>
+          <li>&bull; Drill-down: top projects, last review notes</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 4. SAMPLE -->
+<section id="s4" style="min-height: auto; padding-top:6rem; padding-bottom:6rem;">
+  <div class="content">
+    <p class="label mb-4">Sample dashboard <span class="text-slate-500">&bull; engineers anonymized</span></p>
+    <h2 class="text-3xl md:text-4xl font-bold mb-8">A real week, rendered.</h2>
+    <div class="rounded-xl overflow-hidden border border-slate-700 shadow-2xl bg-slate-950">
+      <img src="img/dashboard-sample.png" alt="Sample dashboard screenshot" class="w-full block">
+    </div>
+    <div class="grid md:grid-cols-3 gap-4 mt-6 text-sm text-slate-400">
+      <div><span class="accent">Engineer cards</span> &mdash; hours, level number, radar of active skills, recent badges.</div>
+      <div><span class="accent">Project hours</span> &mdash; how each engineer split their week across projects.</div>
+      <div><span class="accent">Skill coverage</span> &mdash; team-wide matrix; gaps highlight cross-training opportunities.</div>
+    </div>
+  </div>
+</section>
+
+<!-- 5. HOW IT WORKS -->
+<section id="s5">
+  <img src="img/pipeline.png" class="hero-img soft" alt="">
+  <div class="content">
+    <p class="label mb-4 accent">How it works</p>
+    <h2 class="text-4xl md:text-5xl font-bold mb-12">Three stages. No new tools for the team.</h2>
+    <div class="grid md:grid-cols-3 gap-6">
+      <div class="card">
+        <p class="text-3xl font-bold accent mb-3">01</p>
+        <p class="font-semibold text-white mb-2">Fetch</p>
+        <p class="text-slate-300 text-sm">Pull timesheet entries from the existing Google Sheet and engineer email threads via the Google Workspace API. Read-only, no scraping, no extra logging burden on the team.</p>
+      </div>
+      <div class="card">
+        <p class="text-3xl font-bold accent mb-3">02</p>
+        <p class="font-semibold text-white mb-2">Classify</p>
+        <p class="text-slate-300 text-sm">Each entry's description is tagged with one or more skills (Coding, Mechanical, Testing, &hellip;). v1 uses keyword rules; v2 swaps in a Claude Sonnet pass for nuance.</p>
+      </div>
+      <div class="card">
+        <p class="text-3xl font-bold accent mb-3">03</p>
+        <p class="font-semibold text-white mb-2">Score &amp; render</p>
+        <p class="text-slate-300 text-sm">XP math, level lookup, badge rules, and a self-contained HTML render. One command produces one file.</p>
+      </div>
+    </div>
+    <p class="mt-10 text-slate-400 text-sm max-w-3xl">Engineers keep doing what they already do &mdash; log hours, send their usual emails. Nothing new to learn, nothing new to install.</p>
+  </div>
+</section>
+
+<!-- 6. SKILLS FRAMEWORK -->
+<section id="s6">
+  <img src="img/skills.png" class="hero-img soft" alt="">
+  <div class="content">
+    <p class="label mb-4">Skills framework</p>
+    <h2 class="text-4xl md:text-5xl font-bold mb-8">Eight skills. Everyone graded on the ones they own.</h2>
+    <div class="grid md:grid-cols-2 gap-8">
+      <div>
+        <p class="label mb-3">Skill universe</p>
+        <div class="flex flex-wrap">
+          <span class="badge-pill">Coding</span>
+          <span class="badge-pill">Electronics</span>
+          <span class="badge-pill">Electrical</span>
+          <span class="badge-pill">Mechanical</span>
+          <span class="badge-pill">Assembly</span>
+          <span class="badge-pill">Testing</span>
+          <span class="badge-pill">Teamwork</span>
+          <span class="badge-pill">Management</span>
+        </div>
+        <p class="mt-6 text-slate-300 text-sm leading-relaxed">
+          ICs are graded on the first six plus <strong class="text-white">Teamwork</strong>.
+          Leads on the first six plus <strong class="text-white">Management</strong>.
+          A junior engineer is never penalized for not running meetings; a tech lead never gets a free pass on technical depth.
+        </p>
+      </div>
+      <div class="card">
+        <p class="label mb-3">XP &amp; levels</p>
+        <table class="simple">
+          <thead><tr><th>Level</th><th>XP threshold</th><th>~ years in primary skill</th></tr></thead>
+          <tbody>
+            <tr><td>L1 &ndash; L2</td><td>0 &ndash; 5k</td><td>onboarding</td></tr>
+            <tr><td>L3 &ndash; L4</td><td>20k &ndash; 60k</td><td>1&ndash;2 yrs</td></tr>
+            <tr><td>L5 &ndash; L6</td><td>150k &ndash; 300k</td><td>3&ndash;5 yrs</td></tr>
+            <tr><td>L7 &ndash; L8</td><td>600k &ndash; 1.2M</td><td>10+ yrs</td></tr>
+          </tbody>
+        </table>
+        <p class="mt-4 text-xs text-slate-400">100 XP per logged hour, split across multiple skills if an entry is multi-tagged. Curve calibrated against ~1500 productive hours/yr.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 7. BADGES -->
+<section id="s7">
+  <div class="content">
+    <p class="label mb-4 accent">Motivation layer</p>
+    <h2 class="text-4xl md:text-5xl font-bold mb-8">Badges &mdash; not rankings.</h2>
+    <div class="grid md:grid-cols-3 gap-5">
+      <div class="card"><p class="amber font-semibold mb-1">Daily Reporter</p><p class="text-sm text-slate-300">Logged hours every workday this week.</p></div>
+      <div class="card"><p class="amber font-semibold mb-1">Deep Focus</p><p class="text-sm text-slate-300">Spent 80%+ of the week on a single project.</p></div>
+      <div class="card"><p class="amber font-semibold mb-1">Multi-skilled</p><p class="text-sm text-slate-300">Earned XP in 4+ skills this week.</p></div>
+      <div class="card"><p class="amber font-semibold mb-1">Skill Up</p><p class="text-sm text-slate-300">Crossed a level threshold during the period.</p></div>
+      <div class="card"><p class="amber font-semibold mb-1">Cross-Trainer</p><p class="text-sm text-slate-300">Earned XP outside their primary skill.</p></div>
+      <div class="card"><p class="amber font-semibold mb-1">&hellip; extensible</p><p class="text-sm text-slate-300">Rules are plain Python &mdash; new badges are a one-line addition.</p></div>
+    </div>
+    <p class="mt-10 text-slate-400 max-w-3xl">Engineers see <em>their own</em> growth, not a leaderboard. The team-coverage view is for the manager. The point is to celebrate trajectory, not produce a ranking.</p>
+  </div>
+</section>
+
+<!-- 8. KPI / PERFORMANCE REVIEW INTEGRATION -->
+<section id="s8">
+  <div class="content">
+    <p class="label mb-4 accent">KPI &amp; performance review</p>
+    <h2 class="text-4xl md:text-5xl font-bold mb-4">No more end-of-year surprises.</h2>
+    <p class="text-lg text-slate-300 max-w-3xl mb-10">Each engineer's performance review goals are baked into their dashboard card. Every week and every month, they see the exact KPIs they'll be graded on at the next review &mdash; and how they're tracking right now.</p>
+
+    <div class="grid md:grid-cols-3 gap-5 mb-10">
+      <div class="card">
+        <p class="amber font-semibold mb-2">Weekly &mdash; tactical</p>
+        <p class="text-sm text-slate-300">"This week I gained X XP in Mechanical, Y in Testing. I missed Cross-Trainer because I didn't touch Electrical." Concrete, immediate, actionable.</p>
+      </div>
+      <div class="card">
+        <p class="amber font-semibold mb-2">Monthly &mdash; directional</p>
+        <p class="text-sm text-slate-300">"My target is L5 in Mechanical by Q3. I'm 18k XP away. At my current rate I'll arrive 3 weeks early." A trajectory, not just a snapshot.</p>
+      </div>
+      <div class="card">
+        <p class="amber font-semibold mb-2">Quarterly &mdash; the review</p>
+        <p class="text-sm text-slate-300">No surprises. The annual review draws from the same data the engineer has been seeing all year. The conversation is about <em>direction</em>, not about <em>what happened</em>.</p>
+      </div>
+    </div>
+
+    <div class="card">
+      <p class="label mb-4">What lives on each engineer's card</p>
+      <div class="grid md:grid-cols-2 gap-x-10 gap-y-3 text-sm">
+        <div class="flex gap-3"><span class="accent">&#9656;</span><span><strong class="text-white">Next-review focus skills</strong> &mdash; the 2&ndash;3 skills the manager has flagged as priority growth areas.</span></div>
+        <div class="flex gap-3"><span class="accent">&#9656;</span><span><strong class="text-white">Target levels &amp; dates</strong> &mdash; e.g. "L5 Mechanical by 2026-09-30."</span></div>
+        <div class="flex gap-3"><span class="accent">&#9656;</span><span><strong class="text-white">Specific growth notes</strong> &mdash; "Drive system-level decisions, not just component-level." Manager-authored.</span></div>
+        <div class="flex gap-3"><span class="accent">&#9656;</span><span><strong class="text-white">Strengths to keep leaning on</strong> &mdash; what's already working, so it doesn't get neglected.</span></div>
+        <div class="flex gap-3"><span class="accent">&#9656;</span><span><strong class="text-white">Trajectory line</strong> &mdash; weekly XP trend on the focus skills, with target marker.</span></div>
+        <div class="flex gap-3"><span class="accent">&#9656;</span><span><strong class="text-white">Next review date</strong> &mdash; visible countdown so it's never abstract.</span></div>
+      </div>
+    </div>
+    <p class="mt-8 text-slate-400 text-sm max-w-3xl">The dashboard becomes a <strong class="text-slate-200">continuous performance review</strong> &mdash; engineers always know where they stand, where they're going, and what they need to work on. The annual review stops being a verdict and becomes a checkpoint.</p>
+  </div>
+</section>
+
+<!-- 9. RISKS -->
+<section id="s9">
+  <div class="content">
+    <p class="label mb-4">What can go wrong</p>
+    <h2 class="text-4xl md:text-5xl font-bold mb-8">Known issues &mdash; surfaced, not hidden.</h2>
+    <div class="grid md:grid-cols-2 gap-5">
+      <div class="card">
+        <p class="amber font-semibold mb-2">1. Classifier noise</p>
+        <p class="text-sm text-slate-300">Keyword matcher over-tags. "Install printer" should not earn Coding XP. Inflates some skill totals.</p>
+      </div>
+      <div class="card">
+        <p class="amber font-semibold mb-2">2. Cumulative vs period XP confusion</p>
+        <p class="text-sm text-slate-300">The level number reflects lifetime XP; the green delta reflects the current week. Easy to misread.</p>
+      </div>
+      <div class="card">
+        <p class="amber font-semibold mb-2">3. Review notes are placeholders</p>
+        <p class="text-sm text-slate-300">"Strengths" and "growth areas" must come from the manager. AI-generated content here is not honest data.</p>
+      </div>
+      <div class="card">
+        <p class="amber font-semibold mb-2">4. Email signal is weak</p>
+        <p class="text-sm text-slate-300">Engineers don't email structured EOD reports. Email is decorative, not load-bearing &mdash; the timesheet is the truth.</p>
+      </div>
+      <div class="card">
+        <p class="amber font-semibold mb-2">5. Logging discipline is the floor</p>
+        <p class="text-sm text-slate-300">If an engineer skips logging, they look idle. The dashboard is only as honest as the timesheet.</p>
+      </div>
+      <div class="card">
+        <p class="amber font-semibold mb-2">6. Gaming the system</p>
+        <p class="text-sm text-slate-300">Padding entries to chase XP is possible. Mitigated by manager review &mdash; XP supplements judgment, doesn't replace it.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 10. MITIGATIONS / ROADMAP -->
+<section id="s10">
+  <div class="content">
+    <p class="label mb-4 accent">Mitigations &amp; roadmap</p>
+    <h2 class="text-4xl md:text-5xl font-bold mb-8">How we close each gap.</h2>
+    <div class="space-y-4">
+      <div class="card flex gap-5"><span class="num-bullet">1</span><div>
+        <p class="font-semibold text-white">Swap the keyword classifier for Claude Sonnet</p>
+        <p class="text-sm text-slate-300">Cached, batched LLM classification understands "URDF" and "MoveIt" without manual keyword maintenance. Cuts noise dramatically.</p>
+      </div></div>
+      <div class="card flex gap-5"><span class="num-bullet">2</span><div>
+        <p class="font-semibold text-white">Re-label "Lifetime XP" vs "This week"</p>
+        <p class="text-sm text-slate-300">UI fix &mdash; rename labels and split into two visually distinct elements. No misreads.</p>
+      </div></div>
+      <div class="card flex gap-5"><span class="num-bullet">3</span><div>
+        <p class="font-semibold text-white">Manager-authored review fields</p>
+        <p class="text-sm text-slate-300">Strengths / growth / rating come from a structured input the manager fills in &mdash; not generated. Treated as first-class data.</p>
+      </div></div>
+      <div class="card flex gap-5"><span class="num-bullet">4</span><div>
+        <p class="font-semibold text-white">Logging-discipline flags (manager-only view)</p>
+        <p class="text-sm text-slate-300">Surface "missed N days this month" as a manager-side signal, not an engineer-facing public stat.</p>
+      </div></div>
+      <div class="card flex gap-5"><span class="num-bullet">5</span><div>
+        <p class="font-semibold text-white">History snapshots for trend charts</p>
+        <p class="text-sm text-slate-300">Append weekly snapshots to a small JSONL so monthly views show real week-over-week deltas instead of just totals.</p>
+      </div></div>
+    </div>
+  </div>
+</section>
+
+<!-- 11. CLOSING -->
+<section id="s11">
+  <img src="img/closing.png" class="hero-img" alt="">
+  <div class="content text-center">
+    <p class="label mb-6 accent">In short</p>
+    <h2 class="text-4xl md:text-6xl font-bold mb-8 max-w-4xl mx-auto leading-tight">A continuous, honest view of how each engineer is growing.</h2>
+    <p class="text-lg text-slate-300 max-w-2xl mx-auto mb-10">Built on data the team already produces. Designed to supplement manager judgment, not replace it.</p>
+    <div class="text-sm text-slate-500 mt-12">
+      <p>john@hubbleeng.org</p>
+    </div>
+  </div>
+</section>
+
+</body>
+</html>

@@ -3,12 +3,16 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Engineering Progress Dashboard</title>
+<title>Engineering Progress Dashboard — The Case For</title>
 <script src="https://cdn.tailwindcss.com"></script>
 <style>
   html, body { background:#020617; color:#e2e8f0; font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; }
   .snap { scroll-snap-type: y proximity; height: 100vh; overflow-y: scroll; }
   section { scroll-snap-align: start; min-height: 100vh; padding: 4rem 6vw; display: flex; flex-direction: column; justify-content: center; position: relative; }
+  .topnav { position:fixed; top:0; left:0; right:0; z-index:60; background:rgba(2,6,23,.85); backdrop-filter:blur(8px); border-bottom:1px solid rgba(51,65,85,.5); padding:.6rem 1rem; display:flex; gap:.5rem; justify-content:center; font-size:.8rem; flex-wrap:wrap; }
+  .topnav a { color:#94a3b8; text-decoration:none; padding:.2rem .7rem; border-bottom:2px solid transparent; transition:all .15s; letter-spacing:.05em; }
+  .topnav a:hover { color:#e2e8f0; }
+  .topnav a.active { color:#22d3ee; border-bottom-color:#22d3ee; }
   section p, section li { line-height: 1.65; }
   .accent { color:#22d3ee; }
   .amber { color:#fbbf24; }
@@ -29,10 +33,16 @@
 </head>
 <body class="snap">
 
+<nav class="topnav">
+  <a href="index.html" class="active">The Case For</a>
+  <a href="risks.html">The Case Against</a>
+  <a href="synthesis.html">Synthesis</a>
+</nav>
+
 <nav class="nav hidden md:flex">
   <a href="#s1" title="Cover"></a><a href="#s2" title="Problem"></a><a href="#s3" title="Solution"></a>
   <a href="#s4" title="Sample"></a><a href="#s5" title="How it works"></a><a href="#s6" title="Skills"></a>
-  <a href="#s7" title="Badges"></a><a href="#s8" title="KPI review"></a><a href="#s9" title="Risks"></a><a href="#s10" title="Roadmap"></a><a href="#s11" title="Closing"></a>
+  <a href="#s7" title="Badges"></a><a href="#s8" title="KPI review"></a><a href="#s10" title="Roadmap"></a><a href="#s11" title="Closing"></a>
 </nav>
 
 <!-- 1. COVER -->
@@ -261,36 +271,15 @@
   </div>
 </section>
 
-<!-- 9. RISKS -->
-<section id="s9">
-  <div class="content">
-    <p class="label mb-4">What can go wrong</p>
-    <h2 class="text-4xl md:text-5xl font-bold mb-8">Known issues &mdash; surfaced, not hidden.</h2>
-    <div class="grid md:grid-cols-2 gap-5">
-      <div class="card">
-        <p class="amber font-semibold mb-2">1. Classifier noise</p>
-        <p class="text-sm text-slate-300">Keyword matcher over-tags. "Install printer" should not earn Coding XP. Inflates some skill totals.</p>
-      </div>
-      <div class="card">
-        <p class="amber font-semibold mb-2">2. Cumulative vs period XP confusion</p>
-        <p class="text-sm text-slate-300">The level number reflects lifetime XP; the green delta reflects the current week. Easy to misread.</p>
-      </div>
-      <div class="card">
-        <p class="amber font-semibold mb-2">3. Review notes are placeholders</p>
-        <p class="text-sm text-slate-300">"Strengths" and "growth areas" must come from the manager. AI-generated content here is not honest data.</p>
-      </div>
-      <div class="card">
-        <p class="amber font-semibold mb-2">4. Email signal is weak</p>
-        <p class="text-sm text-slate-300">Engineers don't email structured EOD reports. Email is decorative, not load-bearing &mdash; the timesheet is the truth.</p>
-      </div>
-      <div class="card">
-        <p class="amber font-semibold mb-2">5. Logging discipline is the floor</p>
-        <p class="text-sm text-slate-300">If an engineer skips logging, they look idle. The dashboard is only as honest as the timesheet.</p>
-      </div>
-      <div class="card">
-        <p class="amber font-semibold mb-2">6. Gaming the system</p>
-        <p class="text-sm text-slate-300">Padding entries to chase XP is possible. Mitigated by manager review &mdash; XP supplements judgment, doesn't replace it.</p>
-      </div>
+<!-- 9. BRIDGE TO RISKS -->
+<section id="s9" style="min-height:auto; padding-top:5rem; padding-bottom:5rem;">
+  <div class="content text-center">
+    <p class="label mb-4">A fair warning</p>
+    <h2 class="text-3xl md:text-4xl font-bold mb-6 max-w-3xl mx-auto">Gamifying engineering work has a long track record of going wrong.</h2>
+    <p class="text-base text-slate-300 max-w-2xl mx-auto mb-8">Goodhart's Law, Disney's "electronic whip," billable-hour burnout &mdash; before you buy the pitch above, read the case against and the synthesis.</p>
+    <div class="flex gap-4 justify-center flex-wrap">
+      <a href="risks.html" class="badge-pill" style="font-size:.85rem; padding:.5rem 1.1rem;">&rarr; The Case Against</a>
+      <a href="synthesis.html" class="badge-pill" style="font-size:.85rem; padding:.5rem 1.1rem;">&rarr; Synthesis</a>
     </div>
   </div>
 </section>

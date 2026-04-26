@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Engineering Progress Dashboard — The Case Against</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<style>
+  html, body { background:#020617; color:#e2e8f0; font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; }
+  .snap { scroll-snap-type: y proximity; height: 100vh; overflow-y: scroll; }
+  section { scroll-snap-align: start; min-height: 100vh; padding: 4rem 6vw; display: flex; flex-direction: column; justify-content: center; position: relative; }
+  section p, section li { line-height: 1.65; }
+  .accent { color:#22d3ee; }
+  .amber { color:#fbbf24; }
+  .danger { color:#f87171; }
+  .label { letter-spacing: .25em; text-transform: uppercase; font-size: .8rem; color:#94a3b8; font-weight:500; }
+  .card { background: rgba(15,23,42,.7); border:1px solid rgba(51,65,85,.6); border-radius: 1rem; padding: 1.5rem; backdrop-filter: blur(8px); }
+  .card-warn { border-color: rgba(248,113,113,.4); }
+  .hero-img { position:absolute; inset:0; width:100%; height:100%; object-fit:cover; opacity:.18; z-index:0; }
+  .content { position:relative; z-index:1; max-width: 1100px; margin: 0 auto; width:100%; }
+  .num-bullet { width:2rem; height:2rem; border-radius:9999px; background:#7f1d1d; color:#fee2e2; display:inline-flex; align-items:center; justify-content:center; font-weight:700; font-size:.875rem; flex-shrink:0; }
+  .badge-pill { display:inline-block; padding:.25rem .75rem; border-radius:9999px; font-size:.75rem; background:rgba(34,211,238,.12); color:#22d3ee; border:1px solid rgba(34,211,238,.3); margin-right:.5rem; margin-bottom:.5rem; text-decoration:none; }
+  .nav { position:fixed; right:1.5rem; top:50%; transform:translateY(-50%); z-index:50; display:flex; flex-direction:column; gap:.5rem; }
+  .nav a { width:.5rem; height:.5rem; border-radius:9999px; background:#334155; transition:all .2s; display:block; }
+  .nav a:hover { background:#f87171; transform:scale(1.5); }
+  .topnav { position:fixed; top:0; left:0; right:0; z-index:60; background:rgba(2,6,23,.85); backdrop-filter:blur(8px); border-bottom:1px solid rgba(51,65,85,.5); padding:.6rem 1rem; display:flex; gap:.5rem; justify-content:center; font-size:.8rem; flex-wrap:wrap; }
+  .topnav a { color:#94a3b8; text-decoration:none; padding:.2rem .7rem; border-bottom:2px solid transparent; transition:all .15s; letter-spacing:.05em; }
+  .topnav a:hover { color:#e2e8f0; }
+  .topnav a.active { color:#f87171; border-bottom-color:#f87171; }
+  blockquote.pull { border-left:3px solid #f87171; padding:.25rem 1rem; color:#fca5a5; font-style:italic; font-size:1.05rem; margin:1.5rem 0; }
+</style>
+</head>
+<body class="snap">
+
+<nav class="topnav">
+  <a href="index.html">The Case For</a>
+  <a href="risks.html" class="active">The Case Against</a>
+  <a href="synthesis.html">Synthesis</a>
+</nav>
+
+<nav class="nav hidden md:flex">
+  <a href="#r1" title="Cover"></a>
+  <a href="#r2" title="Goodhart"></a>
+  <a href="#r3" title="Disney"></a>
+  <a href="#r4" title="Omnicare"></a>
+  <a href="#r5" title="Billable hours"></a>
+  <a href="#r6" title="Engineering culture"></a>
+  <a href="#r7" title="For us"></a>
+  <a href="#r8" title="Bridge"></a>
+</nav>
+
+<!-- 1. COVER -->
+<section id="r1">
+  <img src="img/hero.png" class="hero-img" alt="">
+  <div class="content text-center">
+    <p class="label mb-6 danger">The case against</p>
+    <h1 class="text-5xl md:text-7xl font-bold tracking-tight mb-6">Why this might<br><span class="danger">be a bad idea.</span></h1>
+    <p class="text-xl md:text-2xl text-slate-300 max-w-2xl mx-auto">Gamifying work has a 50-year track record. Most of it is bad. Here's what the evidence actually says &mdash; before you trust the pitch.</p>
+    <p class="mt-12 text-sm text-slate-500">Scroll &darr;</p>
+  </div>
+</section>
+
+<!-- 2. GOODHART -->
+<section id="r2">
+  <div class="content">
+    <p class="label mb-4 danger">Failure mode #1</p>
+    <h2 class="text-4xl md:text-5xl font-bold mb-6">Goodhart's Law.</h2>
+    <blockquote class="pull">"When a measure becomes a target, it ceases to be a good measure."<br>&mdash; Charles Goodhart, 1975</blockquote>
+    <div class="grid md:grid-cols-2 gap-6 mt-6">
+      <div class="card card-warn">
+        <p class="amber font-semibold mb-2">What it means here</p>
+        <p class="text-slate-300 text-sm">XP is computed from logged hours. The moment XP starts mattering for evaluation, engineers start optimizing for hours-logged, not work-done. The hours stop being a useful signal of effort &mdash; they become a number to maximize.</p>
+      </div>
+      <div class="card card-warn">
+        <p class="amber font-semibold mb-2">Why it's hard to dodge</p>
+        <p class="text-slate-300 text-sm">It's not a question of whether engineers are honest. It's that any rational person, told the score affects their career, will tilt their behavior toward the score. Every studied incentive system has shown this drift &mdash; sales quotas, school test scores, hospital wait times, police arrest counts. None are exceptions.</p>
+      </div>
+    </div>
+    <p class="mt-8 text-slate-400 text-sm max-w-3xl">The dashboard's first promise &mdash; "honest, continuous visibility into growth" &mdash; is in direct tension with its second promise &mdash; "the KPIs you'll be graded on." The two cannot both stay true once the system has teeth.</p>
+  </div>
+</section>
+
+<!-- 3. DISNEY -->
+<section id="r3">
+  <div class="content">
+    <p class="label mb-4 danger">Case study: the electronic whip</p>
+    <h2 class="text-4xl md:text-5xl font-bold mb-6">Disneyland put a productivity scoreboard on the wall.</h2>
+    <p class="text-lg text-slate-300 max-w-3xl mb-6">In Disneyland's industrial laundry, management installed a real-time scoreboard showing each worker's output. They expected a productivity boost. They got one &mdash; for a while &mdash; alongside several things they didn't expect.</p>
+    <div class="grid md:grid-cols-2 gap-5">
+      <div class="card card-warn">
+        <p class="amber font-semibold mb-2">Injuries went up</p>
+        <p class="text-sm text-slate-300">Workers sped up to keep their numbers visible. The injury rate climbed.</p>
+      </div>
+      <div class="card card-warn">
+        <p class="amber font-semibold mb-2">Bathroom breaks got skipped</p>
+        <p class="text-sm text-slate-300">Stepping away meant your number froze. People held it.</p>
+      </div>
+      <div class="card card-warn">
+        <p class="amber font-semibold mb-2">Pregnant workers fell behind &mdash; visibly</p>
+        <p class="text-sm text-slate-300">The board didn't care about context. Their score told a story they had no way to correct.</p>
+      </div>
+      <div class="card card-warn">
+        <p class="amber font-semibold mb-2">Coworkers turned on each other</p>
+        <p class="text-sm text-slate-300">The team was previously collegial. The board converted teammates into competitors. Slow workers were resented, not helped.</p>
+      </div>
+    </div>
+    <p class="mt-8 text-slate-400 text-sm max-w-3xl">Workers nicknamed the scoreboard "the electronic whip." That phrase &mdash; coined by the people the system was supposedly helping &mdash; is the part to remember.</p>
+  </div>
+</section>
+
+<!-- 4. OMNICARE -->
+<section id="r4">
+  <div class="content">
+    <p class="label mb-4 danger">Case study: the leaderboard backfire</p>
+    <h2 class="text-4xl md:text-5xl font-bold mb-6">Omnicare's helpdesk gamification made everything worse.</h2>
+    <p class="text-lg text-slate-300 max-w-3xl mb-8">Omnicare, a pharmacy software company, gamified customer service: a public leaderboard ranking response speed, with cash bonuses for the fastest responders. Reasonable on paper.</p>
+    <div class="grid md:grid-cols-3 gap-5">
+      <div class="card card-warn">
+        <p class="amber font-semibold mb-2">Wait times went up</p>
+        <p class="text-sm text-slate-300">Staff cherry-picked easy tickets to inflate their counts. Hard tickets sat.</p>
+      </div>
+      <div class="card card-warn">
+        <p class="amber font-semibold mb-2">Turnover went up</p>
+        <p class="text-sm text-slate-300">Employees described it as "Big Brother." Good people quit faster than bad ones could be replaced.</p>
+      </div>
+      <div class="card card-warn">
+        <p class="amber font-semibold mb-2">Trust collapsed</p>
+        <p class="text-sm text-slate-300">A measurement system without explicit consent reads as surveillance, even when it's framed as motivation.</p>
+      </div>
+    </div>
+    <p class="mt-8 text-slate-400 text-sm max-w-3xl">The intent was identical to ours: make the work visible, reward the right behaviors, motivate growth. The execution looked reasonable. The outcome was every metric the system was meant to improve, going the wrong way.</p>
+  </div>
+</section>
+
+<!-- 5. BILLABLE HOURS -->
+<section id="r5">
+  <div class="content">
+    <p class="label mb-4 danger">The closest existing system</p>
+    <h2 class="text-4xl md:text-5xl font-bold mb-6">Billable hours: 50 years of data on what hours-as-target does to people.</h2>
+    <p class="text-lg text-slate-300 max-w-3xl mb-8">Law firms, consulting firms, and accounting firms have run an enormous, decades-long experiment on tying hours-logged to evaluation. The results are not subtle.</p>
+    <div class="grid md:grid-cols-2 gap-5">
+      <div class="card card-warn">
+        <p class="amber font-semibold mb-2">Measurable burnout and depression</p>
+        <p class="text-sm text-slate-300">Lawyers with billable targets above 1800 hours/year show significantly higher rates of burnout, depressive symptoms, and psychological distress than peers without targets.</p>
+      </div>
+      <div class="card card-warn">
+        <p class="amber font-semibold mb-2">Padding is universal</p>
+        <p class="text-sm text-slate-300">Time-padding is so widespread it's an open secret. The American Bar Association has published ethics guidelines specifically on it. The system rewards inefficiency: charging a customer per hour incentivizes dragging the work out.</p>
+      </div>
+      <div class="card card-warn">
+        <p class="amber font-semibold mb-2">Incivility and bullying go up</p>
+        <p class="text-sm text-slate-300">As targets rose, peer-reported experiences of incivility, bullying, and discriminatory behavior rose with them. Hours-pressure corrodes the team's social fabric.</p>
+      </div>
+      <div class="card card-warn">
+        <p class="amber font-semibold mb-2">Quality drops</p>
+        <p class="text-sm text-slate-300">A senior who solves a problem in 30 minutes earns less than a junior who grinds for a day. The system inverts the actual value gradient and over time, top performers either leave or learn to drag their feet.</p>
+      </div>
+    </div>
+    <p class="mt-8 text-slate-300 text-base max-w-3xl">Hours-as-target is one of the best-studied bad incentive systems in the modern economy. Any new system built on the same primitive inherits the same risks unless it explicitly designs them out.</p>
+  </div>
+</section>
+
+<!-- 6. ENGINEERING CULTURE -->
+<section id="r6">
+  <div class="content">
+    <p class="label mb-4 danger">Failure mode #2</p>
+    <h2 class="text-4xl md:text-5xl font-bold mb-6">Engineers experience badges as condescending.</h2>
+    <p class="text-lg text-slate-300 max-w-3xl mb-8">Sales floors, call centers, and support teams accept gamified dashboards. Engineering teams, on average, do not. The reasons are cultural and they are durable.</p>
+    <div class="grid md:grid-cols-2 gap-5">
+      <div class="card card-warn">
+        <p class="amber font-semibold mb-2">XP for inputs feels infantilizing</p>
+        <p class="text-sm text-slate-300">Senior engineers don't want a "Deep Focus" badge for spending a week on one project. They want their judgment trusted. Badges signal "we're tracking your inputs because we don't trust your outputs."</p>
+      </div>
+      <div class="card card-warn">
+        <p class="amber font-semibold mb-2">Hours don't measure value &mdash; especially for seniors</p>
+        <p class="text-sm text-slate-300">A senior who unblocks three teammates in 30 minutes produces more value than a junior who logs 40 hours of grinding. An hours-based XP system rewards the wrong person and everyone on the team can see it.</p>
+      </div>
+      <div class="card card-warn">
+        <p class="amber font-semibold mb-2">The stack-ranking memory</p>
+        <p class="text-sm text-slate-300">A generation of engineers remembers Microsoft's stack ranking and Amazon's URA. Anything that scores them on a continuous numeric axis triggers that pattern-match, fairly or not.</p>
+      </div>
+      <div class="card card-warn">
+        <p class="amber font-semibold mb-2">Hardware doesn't fit software gamification patterns</p>
+        <p class="text-sm text-slate-300">Most gamification tools target sales (calls/closes) or developers (commits/PRs). Mechanical and electronics work has neither. Forcing hours as the proxy can feel arbitrary to the people doing the work.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 7. SPECIFIC FAILURE MODES FOR US -->
+<section id="r7">
+  <div class="content">
+    <p class="label mb-4 danger">Specific risks for this team</p>
+    <h2 class="text-4xl md:text-5xl font-bold mb-8">Five ways this dashboard could go wrong here.</h2>
+    <div class="space-y-4">
+      <div class="card card-warn flex gap-5"><span class="num-bullet">1</span><div>
+        <p class="font-semibold text-white">Comp coupling</p>
+        <p class="text-sm text-slate-300">The day a leader says "your bonus is based on XP," the dashboard becomes the billable hour. Every problem documented in this deck arrives at once. This is the single biggest risk.</p>
+      </div></div>
+      <div class="card card-warn flex gap-5"><span class="num-bullet">2</span><div>
+        <p class="font-semibold text-white">Padding</p>
+        <p class="text-sm text-slate-300">Engineers begin logging 10-hour days for 7 hours of work. The data corrupts itself, silently. Manager loses the very visibility the system was built to provide.</p>
+      </div></div>
+      <div class="card card-warn flex gap-5"><span class="num-bullet">3</span><div>
+        <p class="font-semibold text-white">Public shaming via radar</p>
+        <p class="text-sm text-slate-300">An engineer with a narrow skill profile has it visible to peers. Strengths read as gaps. The "celebrate growth" frame collapses the moment someone feels the chart embarrasses them.</p>
+      </div></div>
+      <div class="card card-warn flex gap-5"><span class="num-bullet">4</span><div>
+        <p class="font-semibold text-white">Level-as-time-served</p>
+        <p class="text-sm text-slate-300">If leveling depends only on accumulated hours-in-bucket, anyone can level up by clocking time in the right project &mdash; without ever demonstrating the skill. The level number becomes meaningless and engineers stop trusting it.</p>
+      </div></div>
+      <div class="card card-warn flex gap-5"><span class="num-bullet">5</span><div>
+        <p class="font-semibold text-white">"Why does Pluem only have 6,200 XP this quarter?"</p>
+        <p class="text-sm text-slate-300">A leader sees the number and reacts to it. The number is now load-bearing in conversations it was never meant to support. The dashboard was built as a mirror &mdash; it has just become a dial.</p>
+      </div></div>
+    </div>
+  </div>
+</section>
+
+<!-- 8. BRIDGE -->
+<section id="r8" style="min-height:auto; padding-top:6rem; padding-bottom:6rem;">
+  <div class="content text-center">
+    <p class="label mb-4">If all of the above is true</p>
+    <h2 class="text-3xl md:text-4xl font-bold mb-6 max-w-3xl mx-auto">&hellip; why might this one work anyway?</h2>
+    <p class="text-base text-slate-300 max-w-2xl mx-auto mb-8">The components of this dashboard exist in adjacent industries, where they have failed. The synthesis page makes the case that the specific design choices here sidestep the standard failure modes &mdash; and names the guardrails that have to stay in place.</p>
+    <a href="synthesis.html" class="badge-pill" style="font-size:.95rem; padding:.6rem 1.4rem;">&rarr; Read the Synthesis</a>
+    <p class="mt-10 text-xs text-slate-500">Sources: Goodhart (1975); Fast Company, "The dark side of gamifying work"; UNLV Law, "Why Law Firms Should Rethink the Billable Hour"; Designveloper case studies (Disney, Omnicare).</p>
+  </div>
+</section>
+
+</body>
+</html>

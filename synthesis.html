@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Engineering Progress Dashboard — Synthesis</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<style>
+  html, body { background:#020617; color:#e2e8f0; font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; }
+  .snap { scroll-snap-type: y proximity; height: 100vh; overflow-y: scroll; }
+  section { scroll-snap-align: start; min-height: 100vh; padding: 4rem 6vw; display: flex; flex-direction: column; justify-content: center; position: relative; }
+  section p, section li { line-height: 1.65; }
+  .accent { color:#22d3ee; }
+  .amber { color:#fbbf24; }
+  .green { color:#4ade80; }
+  .danger { color:#f87171; }
+  .label { letter-spacing: .25em; text-transform: uppercase; font-size: .8rem; color:#94a3b8; font-weight:500; }
+  .card { background: rgba(15,23,42,.7); border:1px solid rgba(51,65,85,.6); border-radius: 1rem; padding: 1.5rem; backdrop-filter: blur(8px); }
+  .card-good { border-color: rgba(74,222,128,.35); }
+  .hero-img { position:absolute; inset:0; width:100%; height:100%; object-fit:cover; opacity:.18; z-index:0; }
+  .content { position:relative; z-index:1; max-width: 1100px; margin: 0 auto; width:100%; }
+  .num-bullet { width:2rem; height:2rem; border-radius:9999px; background:#0e7490; color:#ecfeff; display:inline-flex; align-items:center; justify-content:center; font-weight:700; font-size:.875rem; flex-shrink:0; }
+  .badge-pill { display:inline-block; padding:.25rem .75rem; border-radius:9999px; font-size:.75rem; background:rgba(34,211,238,.12); color:#22d3ee; border:1px solid rgba(34,211,238,.3); margin-right:.5rem; margin-bottom:.5rem; text-decoration:none; }
+  .nav { position:fixed; right:1.5rem; top:50%; transform:translateY(-50%); z-index:50; display:flex; flex-direction:column; gap:.5rem; }
+  .nav a { width:.5rem; height:.5rem; border-radius:9999px; background:#334155; transition:all .2s; display:block; }
+  .nav a:hover { background:#a78bfa; transform:scale(1.5); }
+  .topnav { position:fixed; top:0; left:0; right:0; z-index:60; background:rgba(2,6,23,.85); backdrop-filter:blur(8px); border-bottom:1px solid rgba(51,65,85,.5); padding:.6rem 1rem; display:flex; gap:.5rem; justify-content:center; font-size:.8rem; flex-wrap:wrap; }
+  .topnav a { color:#94a3b8; text-decoration:none; padding:.2rem .7rem; border-bottom:2px solid transparent; transition:all .15s; letter-spacing:.05em; }
+  .topnav a:hover { color:#e2e8f0; }
+  .topnav a.active { color:#a78bfa; border-bottom-color:#a78bfa; }
+  table.simple { width:100%; border-collapse: collapse; font-size:.875rem; }
+  table.simple th, table.simple td { padding: .6rem .8rem; text-align:left; border-bottom:1px solid rgba(51,65,85,.5); vertical-align: top; }
+  table.simple th { color:#94a3b8; font-weight:500; letter-spacing:.05em; text-transform:uppercase; font-size:.7rem; }
+  .pull-quote { font-size:1.6rem; font-weight:600; line-height:1.4; color:#e2e8f0; max-width:48rem; }
+</style>
+</head>
+<body class="snap">
+
+<nav class="topnav">
+  <a href="index.html">The Case For</a>
+  <a href="risks.html">The Case Against</a>
+  <a href="synthesis.html" class="active">Synthesis</a>
+</nav>
+
+<nav class="nav hidden md:flex">
+  <a href="#y1" title="Cover"></a>
+  <a href="#y2" title="What's new"></a>
+  <a href="#y3" title="Design dodges"></a>
+  <a href="#y4" title="Guardrails"></a>
+  <a href="#y5" title="Bottom line"></a>
+</nav>
+
+<!-- 1. COVER -->
+<section id="y1">
+  <img src="img/hero.png" class="hero-img" alt="">
+  <div class="content text-center">
+    <p class="label mb-6" style="color:#a78bfa;">Synthesis</p>
+    <h1 class="text-5xl md:text-7xl font-bold tracking-tight mb-6">An untapped idea &mdash;<br><span style="color:#a78bfa;">if we don't make the standard mistakes.</span></h1>
+    <p class="text-xl md:text-2xl text-slate-300 max-w-2xl mx-auto">Both pages are right. The pitch is real. The risks are real. This page is about the design choices that decide which one we get.</p>
+    <p class="mt-12 text-sm text-slate-500">Scroll &darr;</p>
+  </div>
+</section>
+
+<!-- 2. WHAT'S ACTUALLY NEW -->
+<section id="y2">
+  <div class="content">
+    <p class="label mb-4" style="color:#a78bfa;">What's actually new here</p>
+    <h2 class="text-4xl md:text-5xl font-bold mb-8">Each component exists somewhere. The combination doesn't.</h2>
+    <p class="text-lg text-slate-300 max-w-3xl mb-8">A survey of the adjacent tools shows that every part of this dashboard already exists in industry &mdash; but no single product bundles them for a multi-disciplinary engineering team.</p>
+    <div class="card overflow-x-auto">
+      <table class="simple">
+        <thead><tr><th>Component</th><th>Where it exists today</th><th>What's missing</th></tr></thead>
+        <tbody>
+          <tr><td><strong class="text-white">Career ladder &amp; skill levels</strong></td><td>Progression.fyi, Pluralsight Skill IQ, Skills Base, TalentGuard</td><td>Self-assessed or quiz-based; never tied to actual logged work</td></tr>
+          <tr><td><strong class="text-white">XP / badges / leaderboards</strong></td><td>Plecto, Hoopla, Spinify, Centrical (sales floors)</td><td>Built for sales metrics; almost never applied to engineering</td></tr>
+          <tr><td><strong class="text-white">Dev productivity dashboards</strong></td><td>Jellyfish, LinearB, Swarmia, Code Climate Velocity</td><td>Pulls from git/Jira; misses mechanical, electronics, testing work entirely</td></tr>
+          <tr><td><strong class="text-white">Continuous performance reviews</strong></td><td>Lattice, Workleap, 15Five, Leapsome</td><td>Goal-tracking, no game mechanics, no skill-level visualization</td></tr>
+          <tr><td><strong class="text-white">Hours as evaluation primitive</strong></td><td>Law firms, consulting, agencies (billable hour)</td><td>Tied to revenue, not growth; well-documented as harmful</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="mt-8 text-slate-300 text-base max-w-3xl">The unusual move is using <strong class="text-white">timesheet hours as the source signal for a growth-tracking system</strong> &mdash; in a hardware-heavy team where git logs don't capture the work. That combination is what doesn't exist commercially.</p>
+  </div>
+</section>
+
+<!-- 3. DESIGN DODGES -->
+<section id="y3">
+  <div class="content">
+    <p class="label mb-4 green">Design choices that already dodge the failure modes</p>
+    <h2 class="text-4xl md:text-5xl font-bold mb-8">Four decisions that defuse most of the case against.</h2>
+    <div class="space-y-5">
+      <div class="card card-good">
+        <p class="green font-semibold mb-2">Badges, not rankings</p>
+        <p class="text-sm text-slate-300"><strong class="text-white">Defuses:</strong> the Disney electronic-whip dynamic, the Omnicare leaderboard backfire. There is no public ordering of engineers. No one is "ahead" or "behind" anyone else. The unit of comparison is the engineer against their own past, not against their peers.</p>
+      </div>
+      <div class="card card-good">
+        <p class="green font-semibold mb-2">Radar tracks breadth, not output</p>
+        <p class="text-sm text-slate-300"><strong class="text-white">Defuses:</strong> the hours-equal-value problem. The skill radar rewards <em>cross-training</em> &mdash; the exact behavior billable-hour systems punish. A senior who unblocks teammates earns Teamwork XP. A generalist's wide radar reads as strength, not lack of focus.</p>
+      </div>
+      <div class="card card-good">
+        <p class="green font-semibold mb-2">Same data for engineer and manager</p>
+        <p class="text-sm text-slate-300"><strong class="text-white">Defuses:</strong> the "Big Brother" reaction that killed Omnicare. The dashboard is not a private surveillance tool the manager uses on the engineer. It's a shared mirror &mdash; both parties see exactly the same numbers, at the same time. Surveillance becomes transparency.</p>
+      </div>
+      <div class="card card-good">
+        <p class="green font-semibold mb-2">Hours are actually meaningful for hardware work</p>
+        <p class="text-sm text-slate-300"><strong class="text-white">Defuses:</strong> the "hours don't measure software value" critique. For mechanical, electronics, assembly, and testing work, there is no `git log` substitute. Hours-on-task is closer to truth here than it is in software, and meaningfully closer than self-assessment.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 4. GUARDRAILS -->
+<section id="y4">
+  <div class="content">
+    <p class="label mb-4 amber">Guardrails to add &mdash; or never remove</p>
+    <h2 class="text-4xl md:text-5xl font-bold mb-8">Four rules that have to stay in place.</h2>
+    <p class="text-lg text-slate-300 max-w-3xl mb-8">The design choices above only hold if the rules below stay enforced. Each rule corresponds to a documented failure mode &mdash; remove the rule and the failure mode arrives.</p>
+    <div class="space-y-4">
+      <div class="card flex gap-5"><span class="num-bullet">1</span><div>
+        <p class="font-semibold text-white">XP stays decoupled from compensation. Forever.</p>
+        <p class="text-sm text-slate-300">The instant XP touches bonuses or raises, the system becomes the billable hour. This is the single hardest rule to hold because it will feel reasonable to violate. Don't.</p>
+      </div></div>
+      <div class="card flex gap-5"><span class="num-bullet">2</span><div>
+        <p class="font-semibold text-white">Cap XP per week.</p>
+        <p class="text-sm text-slate-300">A weekly XP ceiling (e.g. 40&ndash;50 logged hours) breaks the "more hours = more progress" loop and removes the incentive to pad. Working weekends doesn't accelerate leveling; it just exhausts the engineer.</p>
+      </div></div>
+      <div class="card flex gap-5"><span class="num-bullet">3</span><div>
+        <p class="font-semibold text-white">Levels require objective evidence, not just hours.</p>
+        <p class="text-sm text-slate-300">Crossing a level threshold is a <em>candidacy</em> for promotion, not the promotion itself. A real level-up requires a build shipped, a checkoff completed, or a peer/manager sign-off. Hours alone never lift a level.</p>
+      </div></div>
+      <div class="card flex gap-5"><span class="num-bullet">4</span><div>
+        <p class="font-semibold text-white">Engineers control radar visibility.</p>
+        <p class="text-sm text-slate-300">Each engineer chooses whether their skill radar is private, manager-shared, or team-visible. Public-by-default is the path to the Disney scoreboard. Private-by-default with opt-in sharing is the path to a tool engineers actually want to use.</p>
+      </div></div>
+    </div>
+  </div>
+</section>
+
+<!-- 5. BOTTOM LINE -->
+<section id="y5">
+  <img src="img/closing.png" class="hero-img" alt="">
+  <div class="content text-center">
+    <p class="label mb-6" style="color:#a78bfa;">Bottom line</p>
+    <p class="pull-quote mx-auto mb-10">It's a mirror, not a dial.<br><span class="text-slate-400 text-lg font-normal">The risk isn't the dashboard. It's the first leadership conversation that turns it into one.</span></p>
+    <p class="text-base text-slate-300 max-w-2xl mx-auto mb-10">Build it as a tool engineers consult to see themselves grow. Hold the line that it never becomes the tool by which they are graded. If both halves of that sentence stay true, the dashboard is the untapped good idea. If either half slips, it's the next billable hour.</p>
+    <div class="flex gap-4 justify-center flex-wrap mt-6">
+      <a href="index.html" class="badge-pill">&larr; The Case For</a>
+      <a href="risks.html" class="badge-pill">&larr; The Case Against</a>
+    </div>
+    <div class="text-sm text-slate-500 mt-12">
+      <p>john@hubbleeng.org</p>
+    </div>
+  </div>
+</section>
+
+</body>
+</html>
